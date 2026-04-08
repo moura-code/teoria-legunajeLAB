@@ -2,6 +2,9 @@
 import re
 import sys
 
+from programa1 import programa1
+
+
 def programa2(RutaFactura):
     
     '''
@@ -9,8 +12,21 @@ def programa2(RutaFactura):
     
     NOTA: El formato de la fecha debe ser AAAA-MM-DD 
     '''
-    fecha = "2026-04-01"        
-    monto = 954,25
+
+    texto = programa1(RutaFactura)
+
+    m_fecha = re.search(
+        r"(\d{2})[-/](\d{2})[-/](\d{4})", texto
+    )
+    
+    m_monto = re.search(r"BANCARIO\s+(\d+,\d{2})", texto)
+    day = m_fecha.group(1)
+    mes = m_fecha.group(2)
+    anio = m_fecha.group(3)
+
+    fecha =f"{anio}-{mes}-{day}"
+    monto = m_monto.group(1)
+
     return fecha, monto
   
 

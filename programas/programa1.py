@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import sys
+from pypdf import PdfReader
 
 
 def programa1(RutaPdf):
@@ -9,6 +10,10 @@ def programa1(RutaPdf):
     '''
     text = ""
     
+
+    reader = PdfReader(RutaPdf)
+    page = reader.pages[0]
+    text = page.extract_text()
     
     return text
 

@@ -2,17 +2,17 @@
 import re
 import sys
 
+from programa2 import programa2
+from programa4 import programa4
 def programa5(RutaPdf,RutaXML):
-    resultado = False
+    fecha , monto = programa2(RutaPdf) 
+    texto = programa4(RutaXML)
+    patron = r'<BanTeng:Movimiento[^>]* \bImporte="' + monto + r'"[^>]* \bFecha="' + fecha + r'"[^>]* />'
+    res = re.search(patron, texto)
+    return res is not None
+ 
     
-    '''
-    SU CÓDIGO
-    '''
     
-    if resultado:
-        return(True)
-    else:
-        return(False)
 
 if __name__ == '__main__':
     entrada_pdf = sys.argv[1]  # archivo entrada (param)

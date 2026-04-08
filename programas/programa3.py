@@ -2,6 +2,7 @@
 import re
 import sys
 
+from programa1 import programa1
 def programa3(RutaFactura):
     
     '''
@@ -9,10 +10,17 @@ def programa3(RutaFactura):
     
     
     '''
+    text = programa1(RutaFactura)
+    res=f""
     
-    res=f"Cant: 10 |Desc: PRUEBA | 10,10 c/u |Total: 101\n"
-    
-    
+    result = re.findall(
+        r"(\d+)\s+(.*)\s+(\d+,\d{2})\s+(\d+,\d{2})",text
+    )
+    for i in result:
+        res+= f"Cant: {i[0].strip()} |Desc: {i[1].strip()} | {i[2].strip()} c/u |Total:  {i[3].strip()}"
+        res+= "\n"
+
+    print(res)
     return res
 
 if __name__ == '__main__':

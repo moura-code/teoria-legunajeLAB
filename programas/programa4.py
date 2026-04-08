@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-import re
 import sys
 
+
 def programa4(RutaXML):
-    '''
-    SU CÓDIGO
-    '''
-    text = ""
-    return text
+
+    with open(RutaXML, encoding="utf-8") as f:
+        return f.read()
   
 
 if __name__ == '__main__':

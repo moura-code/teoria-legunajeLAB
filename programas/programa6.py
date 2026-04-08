@@ -1,13 +1,26 @@
 # -*- coding: utf-8 -*-
 import re
 import sys
+from programa2 import programa2
+from programa4 import programa4
+from programa5 import programa5
 
 def programa6(RutaPdf,RutaXML):
-    text = ""
-    '''
-    SU CÓDIGO
-    '''
-    return text
+    fecha , monto = programa2(RutaPdf)
+    texto = programa4(RutaXML)
+    if programa5(RutaPdf,RutaXML):
+            patron = r'<BanTeng:Movimiento[^>]* \bImporte="' + monto + r'"[^>]* \bFecha="' + fecha + r'"[^>]* />'
+            res = re.sub(patron, "", texto)
+            res = re.sub(r'\n\s*\n', '\n    ', res)
+
+            total_movimientos = re.search(r'<BanTeng:TotalMovimientos>(\d+)</BanTeng:TotalMovimientos>', texto)
+            total_nuevo = int(total_movimientos.group(1)) - 1
+            res = re.sub(r'<BanTeng:TotalMovimientos>(\d+)</BanTeng:TotalMovimientos>', f'<BanTeng:TotalMovimientos>{total_nuevo}</BanTeng:TotalMovimientos>', res)
+            return res
+    else:
+        return texto
+
+   
  
 
 if __name__ == '__main__':
